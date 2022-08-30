@@ -1,4 +1,13 @@
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Book } = require('../models');
+const { signToken } = require('../utils/auth');
 
-module.exports = { typeDefs, resolvers };
+const resolvers = {
+    Query: {
+        getSingleUser: async () => {
+            return User.findOne({
+                $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+              }).populate('books');
+        },
+    }
+}
