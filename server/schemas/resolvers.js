@@ -38,10 +38,10 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async (parent, { user, body }, context) => {
+    saveBook: async (parent, { input }, context) => {
         if (context.user) {
             const book = await Book.create({
-              body
+              input
             });
     
             await User.findOneAndUpdate(
@@ -50,7 +50,7 @@ const resolvers = {
               { new: true, runValidators: true }
             );
     
-            return book;
+            return User;
           }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -66,7 +66,7 @@ const resolvers = {
               { new: true}
             );
     
-            return book;
+            return User;
         }
         throw new AuthenticationError('You need to be logged in!');
       },
