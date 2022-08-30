@@ -36,6 +36,7 @@ const typeDefs = gql`
 
     type Query {
         getSingleUser: User
+        me: User
     }
 
     type Mutation {
@@ -45,3 +46,5 @@ const typeDefs = gql`
         deleteBook(bookId: String!): User
     }
 `;
+
+module.exports = typeDefs;
